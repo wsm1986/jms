@@ -34,7 +34,7 @@ public class TesteConsumidorTopicEstoque {
 		Destination topico = (Destination) context.lookup("loja");
 		
 		// Assinatura duravel
-		MessageConsumer consumer = session.createDurableSubscriber((Topic) topico, "assinatura");
+		MessageConsumer consumer = session.createDurableSubscriber((Topic) topico, "assinatura","ebook is null OR ebook=false ", false);
 		
 
 		consumer.setMessageListener(new MessageListener(){

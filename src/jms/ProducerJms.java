@@ -22,9 +22,12 @@ public class ProducerJms {
     	// Destination fila = (Destination) context.lookup("financeiro");
     	Destination topico = (Destination) context.lookup("loja");
     	MessageProducer producer = session.createProducer(topico);
+    	
     
-    	for (int i = 0; i < 100; i++) {
+    	for (int i = 0; i < 10; i++) {
     		Message message = session.createTextMessage("<pedido><id>"+i+"</id></pedido>");
+    		// Selectores JMS
+    		//message.setBooleanProperty("ebook", false);
     		producer.send(message);
 			
 		}
