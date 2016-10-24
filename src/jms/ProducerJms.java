@@ -18,9 +18,10 @@ public class ProducerJms {
     	connection.start();
     	Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
     	
-    
-    	Destination fila = (Destination) context.lookup("financeiro");
-    	MessageProducer producer = session.createProducer(fila);
+    	// Ex: Fila
+    	// Destination fila = (Destination) context.lookup("financeiro");
+    	Destination topico = (Destination) context.lookup("loja");
+    	MessageProducer producer = session.createProducer(topico);
     
     	for (int i = 0; i < 100; i++) {
     		Message message = session.createTextMessage("<pedido><id>"+i+"</id></pedido>");
