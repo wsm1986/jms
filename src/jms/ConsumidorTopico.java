@@ -10,7 +10,7 @@ import javax.jms.MessageConsumer;
 import javax.jms.Session;
 import javax.naming.InitialContext;
 
-public class TesteConsumidor {
+public class ConsumidorTopico {
 	public static void main(String[] args) throws Exception {
 		InitialContext context = new InitialContext();
 
@@ -23,10 +23,8 @@ public class TesteConsumidor {
 		conexao.start();
 		Session session = conexao
 				.createSession(false, Session.AUTO_ACKNOWLEDGE);
-		//no lookup vem o nome do topico 
-		Destination topico = (Destination) context.lookup("loja");
-		
-		MessageConsumer consumer = session.createConsumer(topico);
+		Destination fila = (Destination) context.lookup("financeiro");
+		MessageConsumer consumer = session.createConsumer(fila);
 		
 		System.out.println("Recebendo msg:");
 		Message message = consumer.receive();
