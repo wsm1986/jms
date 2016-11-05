@@ -18,12 +18,16 @@ public class ProducerJms {
     	connection.start();
     	Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
     	
+    	// Ex: Fila
+    	// Destination fila = (Destination) context.lookup("financeiro");
+    	Destination topico = (Destination) context.lookup("loja");
+    	MessageProducer producer = session.createProducer(topico);
+    	
     
-    	Destination fila = (Destination) context.lookup("financeiro");
-    	MessageProducer producer = session.createProducer(fila);
-    
-    	for (int i = 0; i < 100; i++) {
+    	for (int i = 0; i < 10; i++) {
     		Message message = session.createTextMessage("<pedido><id>"+i+"</id></pedido>");
+    		// Selectores JMS
+    		//message.setBooleanProperty("ebook", false);
     		producer.send(message);
 			
 		}
